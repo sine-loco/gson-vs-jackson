@@ -1,0 +1,7 @@
+{
+  "string": "complex-string",
+  "simple" : {
+    "string": "simple-string",
+    "integer": 10
+  }
+}

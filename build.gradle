@@ -1,0 +1,67 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {url 'https://plugins.gradle.org/m2/'}
+    }
+}
+
+plugins {
+    id 'java'
+    id 'groovy'
+    id 'project-report'
+	id 'io.spring.dependency-management' version '1.0.6.RELEASE'
+}
+
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'ru.snm.misc'
+version = '0.0.1-SNAPSHOT'
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.codehaus.groovy:groovy-all:2.5.3'
+        mavenBom 'org.apache.logging.log4j:log4j:2.11.1'
+        mavenBom 'com.fasterxml.jackson:jackson-bom:2.9.7'
+        mavenBom 'org.spockframework:spock-bom:1.2-groovy-2.5'
+    }
+
+    dependencies {
+        dependency 'com.google.code.gson:gson:2.8.5'
+    }
+}
+
+
+dependencies {
+    implementation(
+            'com.google.code.gson:gson',
+
+            'com.fasterxml.jackson.core:jackson-core',
+            'com.fasterxml.jackson.core:jackson-databind',
+
+
+
+            'org.apache.logging.log4j:log4j-core',
+            'org.apache.logging.log4j:log4j-api',
+
+    )
+
+    testImplementation(
+            'org.spockframework:spock-core',
+            'org.codehaus.groovy:groovy-all',
+    )
+
+}
+tasks.withType( JavaCompile ) {
+    options.encoding = 'UTF-8'
+    options.compilerArgs += '-proc:none'
+}
